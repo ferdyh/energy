@@ -53,7 +53,7 @@ def write_to_duckdb():
         insert or ignore into power_prices
         with data as (
             select unnest(prices) as price
-            from read_json("./temp/energyzero.json")
+            from read_json("/data/temp/energyzero.json")
         )
         select
             price.readingDate as reading_date,
