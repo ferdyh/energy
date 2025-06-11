@@ -21,7 +21,7 @@ def read_energyzero_data():
     """
 
     from_time = datetime.now().replace(second=0, microsecond=0, minute=0)
-    to_time = datetime.now().replace(second=0, microsecond=0, minute=0) + timedelta(hours=33)
+    to_time = datetime.now().replace(second=0, microsecond=0, minute=0) + timedelta(hours=48)
 
     url = f"https://api.energyzero.nl/v1/energyprices?fromDate={from_time.isoformat()}Z&tillDate={to_time.isoformat()}Z&interval=4&usageType=1&inclBtw=true"
     with open("/data/temp/energyzero.json", mode="w+") as f:
