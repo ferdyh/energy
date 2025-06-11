@@ -13,7 +13,13 @@ build: null
 push: null
 
 # pull section allows you to provide instructions for cloning this project in remote locations
-pull: null
+pull:
+  - prefect.deployments.steps.git_clone:
+      id: clone-step
+      repository: https://github.com/ferdyh/energy.git
+  - prefect.deployments.steps.pip_install_requirements:
+      directory: "{{ clone-step.directory }}" # `clone-step` is a user-provided `id` field
+      requirements_file: requirements.txt
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
