@@ -65,14 +65,14 @@ def write_to_duckdb():
             json_value(result.watts, strftime(timestamp, '%x %X'))::integer as watts,
             json_value(result.watt_hours_period, strftime(timestamp, '%x %X'))::integer as watt_hours_period,
             json_value(result.watt_hours, strftime(timestamp, '%x %X'))::integer as watt_hours
-        from read_json("temp/forecast_solar.json");
+        from read_json("/data/temp/forecast_solar.json");
     """)
     c.execute("""
         insert or replace into daily
         select
             strptime(unnest(json_keys(result.watt_hours_day)), '%x')::DATE as date,
             json_value(result.watt_hours_day, strftime(date, '%x'))::integer as watt_hours_day,
-        from read_json("temp/forecast_solar.json");
+        from read_json("/data/temp/forecast_solar.json");
     """)
     c.close()
 
